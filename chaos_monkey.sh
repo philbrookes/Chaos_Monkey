@@ -52,10 +52,10 @@ function outputPercBar {
 function interruptHost {
 	pause 
 	echo "interrupting" $1
-	#ssh $user@$1 $downCommand
+	ssh $user@$1 $downCommand
 	pause 
 	echo "resuming" $1
-	#ssh $user@$1 $upCommand
+	ssh $user@$1 $upCommand
 }
 
 function pause {
