@@ -3,10 +3,10 @@
 minSleep=60
 maxSleep=300
 user="ssh-user"
-hosts=("host1", "host2")
+hosts=("host1" "host2")
 
-downCommand="service my-tested-service stop"
-upCommand="service my-tested-service start"
+downCommand="sudo service my-tested-service down"
+upCommand="sudo service my-tested-service up"
 
 #
 # DO NOT EDIT BELOW THIS LINE
@@ -17,7 +17,7 @@ maxRand=$((maxSleep - minSleep))
 function outputPercBar {
 	amount=$1
 	total=$2
-	barStyle=([ \# \  ])
+	barStyle="[# ]"
 	barLen=25
 	twirlChars=("|" "/" "-" "\\")
 	numTwirl=${#twirlChars[@]}
@@ -26,19 +26,19 @@ function outputPercBar {
 	divider=$((100/barLen))
 	outPerc=$((perc/divider))
 
-	str=${barStyle[0]}
+	str=${barStyle:0:1}
 	for j in $(eval echo {1..$barLen}); do
 		if [[ $j -le $outPerc ]]; then
-			str=$str${barStyle[1]}
+			str=$str${barStyle:1:1}
 		else
-			str=$str${barStyle[2]}
+			str=$str${barStyle:2:1}
 		fi
 	done
 	
 	twirlStep=$((i%numTwirl))
 	twirlChar=${twirlChars[$twirlStep]}
 
-	str=$str${barStyle[3]}
+	str=$str${barStyle:3:1}
 	str=$str"("$perc"%)"
 	if [[ $perc -ge 100 ]]; then
 		tput el
