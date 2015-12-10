@@ -1,7 +1,7 @@
 #!/bin/bash
 
-minSleep=600
-maxSleep=1800
+minSleep=60
+maxSleep=300
 user="ssh-user"
 hosts=("host1" "host2")
 
